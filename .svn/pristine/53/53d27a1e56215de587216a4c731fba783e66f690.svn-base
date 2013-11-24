@@ -1,0 +1,73 @@
+'use strict';
+
+var passport = require('passport');
+var localStrategy = require('passport-local').Strategy;
+
+// simple local strategy with hard-coded user
+var User = {id: 1, username: 'user', password: 'pass'};
+
+module.exports = {
+  localStrategy: new localStrategy(
+    function(username, password, done) {
+     
+      if(username != User.username) {
+        done(null, false, { message: 'Incorrect username.' });
+      } else if(User.password != password) {
+        done(null, false, { message: 'Incorrect password.' });
+      } else {
+        return done(null, User);
+      }
+    }
+  ),
+
+  serializeUser: function(user, done) {
+    done(null, user.id);
+  },
+
+  deserializeUser: function(id, done) {
+    //var user = User.findById(id);
+
+    if (User.id == 1) {
+      done(null, User);
+    } else {
+      done(null, false);
+    }
+  },
+
+  login: function(req, res, next) {
+    return passport.authenticate('local', function(err, user) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return res.send(400, {message: 'Bad username or password'});
+      }
+
+      req.logIn(user, function(err) {
+        if (err) {
+          return next(err);
+        }
+
+        res.json(200, user);
+      });
+    })(req, res, next);
+  },
+
+  logout: function(req, res) {
+    req.logout();
+    return res.send(200);
+  },
+
+  // NOTE: Need to protect all API calls (other than login/logout) with this check
+  ensureAuthenticated: function(req, res, next) {
+      console.log('Calling: ensureAuthenticated.....');
+    if (req.isAuthenticated()) {
+      return next();
+    } else {
+      return res.send(401);
+    }
+  }
+
+  // csrf: see blai
+
+};

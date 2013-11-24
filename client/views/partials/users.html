@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="panel panel-success">
+    <div class="panel-heading"> Reserved to logged in users </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+	  <tr>
+	    <th>Title</th>
+	    <th>Author</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="book in books">
+	    <td>
+	      {{ book.title }}
+	    </td>
+	    <td>
+	      {{ book.author}}
+	    </td>
+	  </tr>
+	</tbody>
+      </table>
+    </div>
+  </div>
+</div>

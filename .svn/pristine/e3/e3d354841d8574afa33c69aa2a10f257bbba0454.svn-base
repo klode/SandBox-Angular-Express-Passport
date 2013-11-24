@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="panel panel-success">
+    <div class="panel-heading"> Reserved to admin </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+	  <tr>
+	    <th>User Name</th>
+	    <th>User Role</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="user in users">
+	    <td>
+	      {{ user.username }}
+	    </td>
+	    <td>
+	      {{user.role}}
+	    </td>
+	  </tr>
+	</tbody>
+      </table>
+    </div>
+  </div>
+</div>

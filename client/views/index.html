@@ -1,0 +1,65 @@
+<!doctype html>
+<html  ng-app="myApp">
+  <head>
+    <meta charset="utf8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <base href="/" />
+    <title>Angular Express Passport TestApp</title>
+    <link href="js/bower-components/bootstrap-css/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body >
+
+
+    <div ng-controller="AppCtrl">
+
+      <!-- Navigation bar ( http://getbootstrap.com/components/#navbar ) -->
+      <div class="navbar navbar-inverse" role="navigation" ng-controller='NavbarCtrl'>
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	    <span class="sr-only">Toggle navigation</span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="#">TestApp</a>
+	</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  <ul class="nav navbar-nav">
+	    <li class={{getActive("/view1")}}><a href="view1">Page1</a></li>
+	    <li class={{getActive("/view2")}}><a href="view2">Page2</a></li>
+	    <li class={{getActive("/users")}}><a href="users">Users-Page</a></li>
+	    <li class={{getActive("/admin")}}><a href="admin">Admin-Page</a></li>
+	  </ul>
+
+	  <ul class="nav navbar-nav navbar-right">
+	    <li>
+	      <a href="/login">Login</a>
+	    </li>
+	    <li>
+	      <a href="#" ng-click="logout()">Logout</a>
+	    </li>
+	  </ul>
+	</div>
+      </div>
+      <!---- end navbar ----->
+
+      <h2>Hello {{name}}</h2>
+
+      <div ng-view></div>
+     
+      <div>Angular: v<span angular-version></span></div>
+    </div>
+  
+    <script src="js/bower-components/angular/angular.js"></script>
+    <script src="js/bower-components/angular-route/angular-route.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/bower-components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+  </body>
+</html>

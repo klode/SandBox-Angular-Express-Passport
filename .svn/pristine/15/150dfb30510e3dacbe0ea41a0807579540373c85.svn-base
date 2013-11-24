@@ -1,0 +1,19 @@
+# Simple Example for an Angular-Express-Passport App
+
+Based on Angular-Express-Seed https://github.com/btford/angular-express-seed
+
+Uses PassportJs for user Authentication 
+
+Has a basic example of server side authorization to show how to make the API calls accessible only to authenticated users, or only to users with admin role.
+
+This is achieved in server/routes.js calling the middleware functions ensureAuthenticated, and ensureAdmin defined in server/authentication.js
+
+## How to use this example
+
+Clone the repository, cd server/, run `npm install` to grab the dependencies, and start hacking!
+
+### Running the app
+
+    node server/server.js
+
+    open browser to: localhost:9000/

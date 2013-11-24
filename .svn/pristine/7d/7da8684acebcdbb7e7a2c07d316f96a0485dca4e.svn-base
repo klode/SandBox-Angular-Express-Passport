@@ -1,0 +1,23 @@
+/*
+ * Serve JSON to our AngularJS client
+ */
+
+exports.name = function (req, res) {
+  res.json({
+  	name: 'Bob'
+  });
+};
+
+exports.users = function (req, res) {
+  res.json([
+      {name: 'user', password: 'pass'},
+      {name: 'not defined', password: 'not defined'}
+  ]);
+};
+
+exports.books = function (req, res) {
+  res.json([
+      {title: 'book1', author: 'author1'},
+      {title: 'book2', author: 'author2'}
+  ]);
+};
