@@ -6,13 +6,13 @@ It uses PassportJs for user Authentication and is a basic example of server side
 
 ## How to use this example
 
--[1)] Clone the repository,
--[2)] run `bower install` 
--[3)] cd server/ 
--[4)] run `npm install`
--[5)] cd ..
--[6)] run `node server/server.j`
--[7)] open browser to: localhost:9000/
+1. Clone the repository,
+2. run `bower install` 
+3. cd server/ 
+4. run `npm install`
+5. cd ..
+6. run `node server/server.j`
+7. open browser to: localhost:9000/
 
 
     
