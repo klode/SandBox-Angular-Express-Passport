@@ -11,7 +11,7 @@ It uses PassportJs for user Authentication and is a basic example of server side
 3. cd server/ 
 4. run `npm install`
 5. cd ..
-6. run `node server/server.j`
+6. run `node server/server.js`
 7. open browser to: localhost:9000/
 
 
