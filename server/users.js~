@@ -1,7 +1,0 @@
-'use strict';
-
-var Users = [{id: 1, username: 'user', password: 'pass'}, {id: 2, username: 'admin', password: 'pass'}]
-
-module.exports = {
-  users: Users;
-}
