@@ -55,8 +55,8 @@
                     if (err) {
                         return next(err);
                     }
-
-                    res.json(200, user);
+                    //delete private data from user before sending
+                    res.json(200, Users.filterUser(user));
                 });
             })(req, res, next);
         },
@@ -87,11 +87,13 @@
         },
 
         user: function(req, res) {
+            console.log('Sending current-user', req.user);
             if (!req.user) {
-                res.json(200, null);
+                return res.json(200, {user: null});
             }
-            var user = {role: req.user.role};
-            return res.json(200, user);
+            //delete private data from user before sending
+            var user = req.user;
+            return res.json(200, Users.filterUser(user));
         }
     };
 })();

@@ -1,4 +1,6 @@
-<div id="flash" class="alert-box alert" ng-show="flash">{{ flash }}</div>
+<div id="flash" class=" alert alert-danger" ng-show="flash">
+    {{ flash }}
+</div>
 
 <div class="container">
   <div class="panel panel-primary">
@@ -14,7 +16,7 @@
 	  {{user.username}} / {{user.password}}
 	</li>
       </ul>
-      
+
       <form ng-submit="login()">
 	<div class="control-group">
 	  <label for="username" class="control-label" >Username:</label>

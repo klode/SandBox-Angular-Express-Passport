@@ -11,54 +11,55 @@
                 $rootScope.flash = '';
             };
         })
-        .factory('$session', function() {
-            return {
-                get: function(key) {
-                    return sessionStorage.getItem(key);
-                },
-                set: function(key, value) {
-                    return sessionStorage.setItem(key, value);
-                },
-                unset: function(key) {
-                    return sessionStorage.removeItem(key);
-                },
-                clear: function() {
-                    return sessionStorage.clear();
-                }
-            };
-        })
-        .service('AuthenticationService', function($http, $timeout, $q, $session, $flash) {
-            this.login = function(credentials) {
-                var login = $http.post('/login', credentials);
-                login.success(function(user) {
-                    $session.set('user', user);
-                    $flash.clear();
-                }).error(function(error) {
-                    error = error.error ? error.error : error;
-                    $flash.show(error.message || error);
-                });
-                return login;
-            };
+        .factory('AuthenticationService', function($http, $timeout, $q, $flash) {
+            var service = {
+                // Information about the current user
+                currentUser: null,
 
-            this.logout = function() {
-                var logout = $http.get('/logout');
-                logout.success(function() {
-                    $session.clear();
-                });
-                return logout;
-            };
+                login: function(credentials) {
+                    var login = $http.post('/login', credentials);
+                    login.success(function(data) {
+                        service.currentUser = data.user;
+                        $flash.clear();
+                    }).error(function(error) {
+                        error = error.error ? error.error : error;
+                        $flash.show(error.message || error);
+                    });
+                    return login;
+                },
 
-            this.user = function() {
-                var user = $session.get('user');
-                if (user) {
-                    var deferred = $q.defer();
-                    $timeout(function() {
-                        deferred.resolve(user);
-                    }, 0);
-                    return deferred.promise;
-                } else {
-                    return $http.get('/user');
+                logout: function() {
+                    var logout = $http.get('/logout');
+                    logout.success(function() {
+                        service.currentUser = null;
+                    });
+                    return logout;
+                },
+
+                // Ask the backend to see if a user is already authenticated -
+                // this may be from a previous session.
+                requestCurrentUser: function() {
+                    if (service.isAuthenticated()) {
+                        return $q.when(service.currentUser);
+                    } else {
+                        return $http.get('/user').then(function(response) {
+                            service.currentUser = response.data.user;
+                            return service.currentUser;
+                        });
+                    }
+                },
+
+                // Is the current user authenticated?
+                isAuthenticated: function() {
+                    return !!service.currentUser;
+                },
+
+                // Is the current user admin?
+                isAdmin: function() {
+                    return service.isAuthenticated() && (service.currentUser.role === "ADMIN");
                 }
+
             };
+            return service;
         });
 })();

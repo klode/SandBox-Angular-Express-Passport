@@ -10,7 +10,12 @@
         'myApp.filters',
         'myApp.services',
         'myApp.directives'
-    ]).
+    ])
+    .run(['AuthenticationService', function(AuthenticationService) {
+        // Get the current user when the application starts
+        // (in case they are still logged in from a previous session)
+        AuthenticationService.requestCurrentUser();
+    }]).
     run(function($rootScope, $location, AuthenticationService) {
         // put logout() on rootscope so can be accessed anywhere
         $rootScope.logout = function() {

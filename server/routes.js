@@ -19,7 +19,7 @@
         app.get('/logout', printConsoleMessage('ROUTER logout'),
             authentication.logout);
 
-        app.get('/user', authentication.user());
+        app.get('/user', authentication.user);
 
         // serve index and view partials
         app.get('/', printConsoleMessage('ROUTER root'),

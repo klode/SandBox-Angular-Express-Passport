@@ -1,8 +1,10 @@
 (function() {'use strict';
 
     angular.module('myApp.controllers', []).
-    controller('AppCtrl', function($scope, $http) {
+    controller('AppCtrl', function($scope, $http, AuthenticationService) {
 
+        $scope.isAdmin = AuthenticationService.isAdmin;
+        $scope.isAuthenticated = AuthenticationService.isAuthenticated;
         $http({
             method: 'GET',
             url: '/api/name'
@@ -49,7 +51,6 @@
     controller('NavbarCtrl', function($scope, $location) {
 
         $scope.getActive = function(path) {
-            // console.log($location.path().substr(0, path.length));
             if ($location.path().substr(0, path.length) == path) {
                 return "active";
             } else {
