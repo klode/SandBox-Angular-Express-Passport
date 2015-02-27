@@ -1,7 +1,7 @@
-'use strict';
+(function() {'use strict';
 
 var passport = require('passport');
-var localStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 // simple local strategy with hard-coded user
 var Users = require('./users');
@@ -9,7 +9,7 @@ var Users = require('./users');
 console.log('test Users:\n', JSON.stringify(Users.testUsers, null, 4));
 
 module.exports = {
-  localStrategy: new localStrategy(
+  localStrategy: new LocalStrategy(
     function(username, password, done) {
         var user = Users.findUserByUsername(username);
         if (!user) {
@@ -79,7 +79,5 @@ module.exports = {
           return res.send(401);
       }
   },
-
-
-
 };
+})();
