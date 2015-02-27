@@ -85,5 +85,13 @@
                 return res.send(401);
             }
         },
+
+        user: function(req, res) {
+            if (!req.user) {
+                res.json(200, null);
+            }
+            var user = {role: req.user.role};
+            return res.json(200, user);
+        }
     };
 })();
